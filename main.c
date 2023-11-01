@@ -32,31 +32,52 @@ typedef struct Bird
 	 * and each tick, GRAVITY will reduce the yVelocity to simulate it
 	 * dropping in the air.
 	 */
-	int JUMP_STRENGTH;
+	int jumpStrength;
 	float yVelocity;
 } Bird;
 
-Bird* InitBird(Bird* bird);
+Bird* InitBird();
+void Jump(Bird* bird);
+void ApplyGravity(Bird* bird, float deltaTime);
 
 int main(void)
 {
+	// Initialise entities in the game (bird and pipes).
+	Bird* player = InitBird();
+
+	// Initialise the window.
+	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Flappy Bin Chicken");
+
+	// Tick.
+	while (!WindowShouldClose())
+	{
+	}
 
 	return 0;
 }
 
-Bird* InitBird(Bird* bird)
+Bird* InitBird()
 {
-	if (bird == NULL)
+	Bird* bird = (Bird*)malloc(sizeof(Bird));
+	if (bird != NULL)
 	{
-		printf("Bird was not allocated memory properly and was a nullptr.\n");
-		CloseWindow();
+		bird->position.x = GetScreenWidth() * 0.1;
+		bird->position.y = GetScreenHeight() / 2;
+		bird->size.x, bird->size.y = 30;
+		bird->jumpStrength = 600;
+		bird->yVelocity = 0;
 	}
 
-	bird->position.x = GetScreenWidth() * 0.1;
-	bird->position.y = GetScreenHeight() / 2;
-	bird->size.x, bird->size.y = 30;
-	bird->JUMP_STRENGTH = 600;
-	bird->yVelocity = 0;
-
 	return bird;
+}
+
+void Jump(Bird* bird)
+{
+	bird->yVelocity = bird->jumpStrength;
+}
+
+void ApplyGravity(Bird* bird, float deltaTime)
+{
+	bird->position.y -= bird->yVelocity * deltaTime;
+	bird->yVelocity -= GRAVITY * deltaTime;
 }
