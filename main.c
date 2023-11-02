@@ -11,14 +11,17 @@
 // Pipe attributes.
 #define PIPE_DELTA_X 240
 #define PIPE_DELTA_Y 125
+#define PIPE_WIDTH 30
 
 typedef struct Pipe
 {
 	// The positions from which the pipe will be rendered and their size (l x h).
 	Vector2 upperPosition; 
 	Vector2 lowerPosition;
-	Vector2 size;
 } Pipe;
+
+int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX);
+void InitPipes(Pipe pipes[]);
 
 // Bird attributes.
 typedef struct Bird
@@ -42,12 +45,12 @@ void ApplyGravity(Bird* bird, float deltaTime);
 
 int main(void)
 {
-	// Initialise entities in the game (bird and pipes).
-	Bird* player = InitBird();
-
 	// Initialise the window.
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Flappy Bin Chicken");
 	SetTargetFPS(240);
+	
+	// Initialise entities in the game (bird and pipes).
+	Bird* player = InitBird();
 
 	// Tick.
 	while (!WindowShouldClose())
@@ -79,8 +82,8 @@ Bird* InitBird()
 	Bird* bird = (Bird*)malloc(sizeof(Bird));
 	if (bird != NULL)
 	{
-		bird->position.x = SCREEN_WIDTH * 0.1;
-		bird->position.y = SCREEN_HEIGHT / 2;
+		bird->position.x = GetScreenWidth() * 0.1;
+		bird->position.y = GetScreenHeight() / 2;
 		bird->size.x = 30;
 		bird->size.y = 30;
 		bird->jumpStrength = 600;
