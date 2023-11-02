@@ -47,12 +47,30 @@ int main(void)
 
 	// Initialise the window.
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Flappy Bin Chicken");
+	SetTargetFPS(240);
 
 	// Tick.
 	while (!WindowShouldClose())
 	{
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			Jump(player);
+		}
+
+		// Applying movement to bird and pipes.
+		ApplyGravity(player, GetFrameTime());
+
+		// Drawing.
+		BeginDrawing();
+		ClearBackground(BLACK);
+		DrawRectangleV(player->position, player->size, GOLD);
+		EndDrawing();
 	}
 
+	free(player);
+	player = NULL;
+
+	CloseWindow();
 	return 0;
 }
 
@@ -61,9 +79,10 @@ Bird* InitBird()
 	Bird* bird = (Bird*)malloc(sizeof(Bird));
 	if (bird != NULL)
 	{
-		bird->position.x = GetScreenWidth() * 0.1;
-		bird->position.y = GetScreenHeight() / 2;
-		bird->size.x, bird->size.y = 30;
+		bird->position.x = SCREEN_WIDTH * 0.1;
+		bird->position.y = SCREEN_HEIGHT / 2;
+		bird->size.x = 30;
+		bird->size.y = 30;
 		bird->jumpStrength = 600;
 		bird->yVelocity = 0;
 	}
@@ -73,11 +92,14 @@ Bird* InitBird()
 
 void Jump(Bird* bird)
 {
-	bird->yVelocity = bird->jumpStrength;
+	if (bird != NULL) bird->yVelocity = bird->jumpStrength;
 }
 
 void ApplyGravity(Bird* bird, float deltaTime)
 {
-	bird->position.y -= bird->yVelocity * deltaTime;
-	bird->yVelocity -= GRAVITY * deltaTime;
+	if (bird != NULL)
+	{
+		bird->position.y -= bird->yVelocity * deltaTime;
+		bird->yVelocity -= GRAVITY * deltaTime;
+	}
 }
