@@ -12,6 +12,7 @@
 #define PIPE_DELTA_X 240
 #define PIPE_DELTA_Y 125
 #define PIPE_WIDTH 30
+#define PIPE_MS 100
 
 typedef struct Pipe
 {
@@ -22,6 +23,8 @@ typedef struct Pipe
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX);
 void InitPipes(Pipe pipes[]);
+void MovePipes(Pipe pipes[], const float deltaTime);
+void DrawPipes(Pipe pipes[]);
 
 // Bird attributes.
 typedef struct Bird
@@ -51,7 +54,9 @@ int main(void)
 	
 	// Initialise entities in the game (bird and pipes).
 	Bird* player = InitBird();
+
 	Pipe pipes[GetNumPipes(GetScreenWidth(), PIPE_WIDTH, PIPE_DELTA_X)];
+	InitPipes(pipes);
 	
 
 	// Tick.
@@ -64,11 +69,13 @@ int main(void)
 
 		// Applying movement to bird and pipes.
 		ApplyGravity(player, GetFrameTime());
+		MovePipes(pipes, GetFrameTime());
 
 		// Drawing.
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawRectangleV(player->position, player->size, GOLD);
+		DrawPipes(pipes);
 		EndDrawing();
 	}
 
@@ -109,11 +116,14 @@ void ApplyGravity(Bird* bird, float deltaTime)
 	}
 }
 
+// TODO: Verify that the number of pipes calculated is correct.
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
 {
+	printf("num pipes: %d", screenWidth / (pipeWidth + pipeDeltaX));
 	return screenWidth / (pipeWidth + pipeDeltaX);
 }
 
+// TODO: Verify that the pipes are being initialised in the right position.
 // Initialise the drawing position of the pipes based on the screen width, height and the gaps between them.
 void InitPipes(Pipe pipes[])
 {
@@ -127,6 +137,31 @@ void InitPipes(Pipe pipes[])
 
 			pipes[i].upperPosition.y = middleOfScreen - (PIPE_DELTA_Y / 2) - GetScreenHeight();
 			pipes[i].lowerPosition.y = middleOfScreen + (PIPE_DELTA_Y / 2);
+		}
+	}
+}
+
+// TODO: Verify this as well, although I think this is correct and the two functions above are what is causing the problems.
+void MovePipes(Pipe pipes[], const float deltaTime)
+{
+	if (sizeof(*pipes) > 0)
+	{
+		for (int i = 0; i < sizeof(*pipes) / sizeof(pipes[0]); ++i)
+		{
+			pipes[i].upperPosition.x -= PIPE_MS * deltaTime;
+			pipes[i].lowerPosition.x -= PIPE_MS * deltaTime;
+		}
+	}
+}
+
+void DrawPipes(Pipe pipes[])
+{
+	if (sizeof(*pipes) > 0)
+	{
+		for (int i = 0; i < sizeof(*pipes) / sizeof(pipes[0]); ++i)
+		{
+			DrawRectangle(pipes[i].upperPosition.x, pipes[i].upperPosition.y, PIPE_WIDTH, GetScreenHeight(), RAYWHITE);
+			DrawRectangle(pipes[i].lowerPosition.x, pipes[i].lowerPosition.y, PIPE_WIDTH, GetScreenHeight(), RAYWHITE);
 		}
 	}
 }
