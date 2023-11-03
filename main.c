@@ -106,3 +106,8 @@ void ApplyGravity(Bird* bird, float deltaTime)
 		bird->yVelocity -= GRAVITY * deltaTime;
 	}
 }
+
+int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
+{
+	return screenWidth / (pipeWidth + pipeDeltaX);
+}
