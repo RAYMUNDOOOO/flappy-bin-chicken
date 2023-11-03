@@ -51,6 +51,8 @@ int main(void)
 	
 	// Initialise entities in the game (bird and pipes).
 	Bird* player = InitBird();
+	Pipe pipes[GetNumPipes(GetScreenWidth(), PIPE_WIDTH, PIPE_DELTA_X)];
+	
 
 	// Tick.
 	while (!WindowShouldClose())
@@ -110,4 +112,21 @@ void ApplyGravity(Bird* bird, float deltaTime)
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
 {
 	return screenWidth / (pipeWidth + pipeDeltaX);
+}
+
+// Initialise the drawing position of the pipes based on the screen width, height and the gaps between them.
+void InitPipes(Pipe pipes[])
+{
+	if (sizeof(*pipes) > 0)
+	{
+		const int middleOfScreen = GetScreenHeight() / 2; // We will determine the drawing positions of the pipes from this.
+		for (int i = 0; i < sizeof(*pipes) / sizeof(pipes[0]); ++i)
+		{
+			pipes[i].upperPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
+			pipes[i].lowerPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
+
+			pipes[i].upperPosition.y = middleOfScreen - (PIPE_DELTA_Y / 2) - GetScreenHeight();
+			pipes[i].lowerPosition.y = middleOfScreen + (PIPE_DELTA_Y / 2);
+		}
+	}
 }
