@@ -150,8 +150,8 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			// TODO: Reset pipe position when exiting screen.
 			if (pipes[i].upperPosition.x <= 0)
 			{
-				pipes[i].upperPosition.x == GetScreenWidth();
-				pipes[i].lowerPosition.x == GetScreenWidth();
+				pipes[i].upperPosition.x = GetScreenWidth();
+				pipes[i].lowerPosition.x = GetScreenWidth();
 			}
 		}
 	}
