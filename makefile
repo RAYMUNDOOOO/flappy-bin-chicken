@@ -3,8 +3,8 @@ DEPS = raylib.h
 LIBS := 
 LDFLAGS := 
 
-ifeq ($(OS),WINDOWS_NT)
-	LIBS += -llibraylib -lopengl32 -lgdi32 -lwinmm
+ifeq ($(OS), WINDOWS_NT)
+	LIBS = -llibraylib -lopengl32 -lgdi32 -lwinmm
 	LDFLAGS = -L.
 else
 	UNAME_S := $(shell uname -s)
@@ -15,7 +15,7 @@ else
 endif
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o %@ %< $(LDFLAGS) $(LIBS)
+	$(CC) -c -o $@ $< $(LDFLAGS) $(LIBS)
 
 flappybinchicken: main.o 
 	$(CC) -o flappybinchicken main.o $(LDFLAGS) $(LIBS)
