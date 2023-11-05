@@ -6,7 +6,7 @@
 
 // Screen attributes.
 #define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 1136
+#define SCREEN_HEIGHT 900
 
 // Pipe attributes.
 #define PIPE_DELTA_X 140
