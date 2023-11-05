@@ -5,14 +5,14 @@
 #define GRAVITY 980 // To effect how the bird flies.
 
 // Screen attributes.
-#define SCREEN_WIDTH 960
-#define SCREEN_HEIGHT 540
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 1136
 
 // Pipe attributes.
-#define PIPE_DELTA_X 240
-#define PIPE_DELTA_Y 125
-#define PIPE_WIDTH 30
-#define PIPE_MS 1000
+#define PIPE_DELTA_X 140
+#define PIPE_DELTA_Y 175
+#define PIPE_WIDTH 80
+#define PIPE_MS 175
 
 typedef struct Pipe
 {
@@ -55,7 +55,7 @@ int main(void)
 	// Initialise entities in the game (bird and pipes).
 	Bird* player = InitBird();
 
-	const int numPipes = GetNumPipes(GetScreenWidth(), PIPE_WIDTH, PIPE_DELTA_X);
+	const int numPipes = GetNumPipes(GetScreenWidth(), PIPE_WIDTH, PIPE_DELTA_X) + 2;
 	Pipe pipes[numPipes];
 	InitPipes(pipes, numPipes);
 	
@@ -95,7 +95,7 @@ Bird* InitBird()
 		bird->position.y = GetScreenHeight() / 2;
 		bird->size.x = 30;
 		bird->size.y = 30;
-		bird->jumpStrength = 600;
+		bird->jumpStrength = 450;
 		bird->yVelocity = 0;
 	}
 
@@ -118,7 +118,7 @@ void ApplyGravity(Bird* bird, float deltaTime)
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
 {
-	return screenWidth / (pipeWidth + pipeDeltaX);
+	return (screenWidth / (pipeWidth + pipeDeltaX));
 }
 
 // Initialise the drawing position of the pipes based on the screen width, height and the gaps between them.
@@ -147,7 +147,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			pipes[i].upperPosition.x -= PIPE_MS * deltaTime;
 			pipes[i].lowerPosition.x -= PIPE_MS * deltaTime;
 
-			if (pipes[i].upperPosition.x <= 0)
+			if (pipes[i].upperPosition.x <= -PIPE_WIDTH)
 			{
 				pipes[i].upperPosition.x = GetScreenWidth();
 				pipes[i].lowerPosition.x = GetScreenWidth();
