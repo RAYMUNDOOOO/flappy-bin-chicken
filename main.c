@@ -132,8 +132,9 @@ void InitPipes(Pipe pipes[], const int numPipes)
 			pipes[i].upperPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 			pipes[i].lowerPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 
+			// TODO: Make this random within a range.
 			pipes[i].upperPosition.y = middleOfScreen - (PIPE_DELTA_Y / 2) - GetScreenHeight();
-			pipes[i].lowerPosition.y = middleOfScreen + (PIPE_DELTA_Y / 2);
+			pipes[i].lowerPosition.y = pipes[i].upperPosition.y + GetScreenHeight() + PIPE_DELTA_Y);
 		}
 	}
 }
@@ -151,6 +152,8 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			{
 				pipes[i].upperPosition.x = GetScreenWidth();
 				pipes[i].lowerPosition.x = GetScreenWidth();
+
+				// TODO: Rest to random y position in a range.
 			}
 		}
 	}
