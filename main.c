@@ -9,7 +9,7 @@
 #define SCREEN_HEIGHT 900
 
 // Pipe attributes.
-#define PIPE_DELTA_X 140
+#define PIPE_DELTA_X 170
 #define PIPE_DELTA_Y 175
 #define PIPE_WIDTH 80
 #define PIPE_MS 175
@@ -133,11 +133,6 @@ void InitPipes(Pipe pipes[], const int numPipes)
 			pipes[i].upperPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 			pipes[i].lowerPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 
-			// TODO: Make this random within a range.
-			/*
-			pipes[i].upperPosition.y = middleOfScreen - (PIPE_DELTA_Y / 2) - GetScreenHeight();
-			pipes[i].lowerPosition.y = pipes[i].upperPosition.y + GetScreenHeight() + PIPE_DELTA_Y);
-			*/
 			SetRandYPos(&pipes[i]);
 		}
 	}
@@ -177,10 +172,10 @@ void DrawPipes(Pipe pipes[], const int numPipes)
 
 void SetRandYPos(Pipe* pipe)
 {
-	const int maxPosY = (GetScreenHeight() / 2) + (GetScreenHeight() * 0.5);
-	const int minPosY = (GetScreenHeight() / 2) - (GetScreenHeight() * 0.5);
+	const int maxPosY = (GetScreenHeight() / 2) + (GetScreenHeight() * 0.3);
+	const int minPosY = (GetScreenHeight() / 2) - (GetScreenHeight() * 0.3);
 
 	int randY =  minPosY + (rand() % (maxPosY - minPosY));
-	pipe->upperPosition.y = randY;
-	pipe->lowerPosition.y = pipe->upperPosition.y + PIPE_DELTA_Y;
+	pipe->upperPosition.y = randY - GetScreenHeight();
+	pipe->lowerPosition.y = randY + PIPE_DELTA_Y;
 }
