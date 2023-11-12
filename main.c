@@ -25,6 +25,7 @@ int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX
 void InitPipes(Pipe pipes[], const int numPipes);
 void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime);
 void DrawPipes(Pipe pipes[], const int numPipes);
+void SetRandYPos(Pipe* pipe);
 
 // Bird attributes.
 typedef struct Bird
@@ -133,8 +134,11 @@ void InitPipes(Pipe pipes[], const int numPipes)
 			pipes[i].lowerPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 
 			// TODO: Make this random within a range.
+			/*
 			pipes[i].upperPosition.y = middleOfScreen - (PIPE_DELTA_Y / 2) - GetScreenHeight();
 			pipes[i].lowerPosition.y = pipes[i].upperPosition.y + GetScreenHeight() + PIPE_DELTA_Y);
+			*/
+			SetRandYPos(&pipes[i]);
 		}
 	}
 }
@@ -153,7 +157,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 				pipes[i].upperPosition.x = GetScreenWidth();
 				pipes[i].lowerPosition.x = GetScreenWidth();
 
-				// TODO: Rest to random y position in a range.
+				SetRandYPos(&pipes[i]);
 			}
 		}
 	}
@@ -169,4 +173,14 @@ void DrawPipes(Pipe pipes[], const int numPipes)
 			DrawRectangle(pipes[i].lowerPosition.x, pipes[i].lowerPosition.y, PIPE_WIDTH, GetScreenHeight(), RAYWHITE);
 		}
 	}
+}
+
+void SetRandYPos(Pipe* pipe)
+{
+	const int maxPosY = (GetScreenHeight() / 2) + (GetScreenHeight() * 0.5);
+	const int minPosY = (GetScreenHeight() / 2) - (GetScreenHeight() * 0.5);
+
+	int randY =  minPosY + (rand() % (maxPosY - minPosY));
+	pipe->upperPosition.y = randY;
+	pipe->lowerPosition.y = pipe->upperPosition.y + PIPE_DELTA_Y;
 }
