@@ -9,10 +9,10 @@
 #define SCREEN_HEIGHT 900
 
 // Pipe attributes.
-#define PIPE_DELTA_X 170
+#define PIPE_DELTA_X 180
 #define PIPE_DELTA_Y 175
 #define PIPE_WIDTH 80
-#define PIPE_MS 175
+#define PIPE_MS 150
 
 typedef struct Pipe
 {
