@@ -2,7 +2,7 @@ CC = gcc
 LIBS := 
 LDFLAGS := 
 
-ifeq ($(OS), WINDOWS_NT)
+ifeq ($(OS), Windows_NT)
 	LIBS += -llibraylib -lopengl32 -lgdi32 -lwinmm
 	LDFLAGS += -L.
 else
@@ -14,5 +14,5 @@ endif
 
 flappybinchicken: main.c raylib.h
 	$(CC) -o flappybinchicken main.c $(LDFLAGS) $(LIBS)
-
+	$(info FlappyBinChicken successfully compiled!)
 
