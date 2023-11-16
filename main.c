@@ -23,6 +23,7 @@ typedef struct Pipe
 	Vector2 lowerPosition;
 	Rectangle upperBody;
 	Rectangle lowerBody;
+	Rectangle scoreBody;
 } Pipe;
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX);
@@ -166,9 +167,13 @@ void InitPipes(Pipe pipes[], const int numPipes)
 			pipes[i].upperBody.height = GetScreenHeight();
 			pipes[i].lowerBody.width = PIPE_WIDTH;
 			pipes[i].lowerBody.height = GetScreenHeight();
+			pipes[i].scoreBody.x = pipes[i].upperPosition.x - 300;
+			pipes[i].scoreBody.width = PIPE_WIDTH;
+			pipes[i].scoreBody.height = PIPE_DELTA_Y + 50;
 
-			pipes[i].upperBody.y = (GetScreenHeight() / 2 - 300) - GetScreenHeight();
-			pipes[i].lowerBody.y = (GetScreenHeight() / 2) + 300;
+			pipes[i].upperBody.y = (GetScreenHeight() / 2 - 100) - GetScreenHeight();
+			pipes[i].lowerBody.y = (GetScreenHeight() / 2) + 100;
+			pipes[i].scoreBody.y = pipes[i].upperBody.y + GetScreenHeight();
 		}
 	}
 }
@@ -183,6 +188,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			pipes[i].upperBody.x = pipes[i].upperPosition.x;
 			pipes[i].lowerPosition.x -= PIPE_MS * deltaTime;
 			pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
+			// pipes[i].scoreBody.x -= pipes[i].lowerPosition.x;
 
 			if (pipes[i].upperPosition.x <= -PIPE_WIDTH)
 			{
@@ -190,6 +196,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 				pipes[i].upperBody.x = pipes[i].upperPosition.x;
 				pipes[i].lowerPosition.x = GetScreenWidth();
 				pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
+				// pipes[i].scoreBody.x = pipes[i].lowerPosition.x;
 
 				SetRandYPos(&pipes[i]);
 			}
@@ -205,6 +212,7 @@ void DrawPipes(Pipe pipes[], const int numPipes)
 		{
 			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, RED);
 			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
+			DrawRectanglePro(pipes[i].scoreBody, (Vector2){ 0, 0 }, 0, YELLOW);
 		}
 	}
 }
@@ -219,4 +227,5 @@ void SetRandYPos(Pipe* pipe)
 	pipe->lowerPosition.y = randY + PIPE_DELTA_Y;
 	pipe->upperBody.y = pipe->upperPosition.y;
 	pipe->lowerBody.y = pipe->lowerPosition.y;
+	// pipe->scoreBody.y = pipe->upperPosition.y + GetScreenHeight();
 }
