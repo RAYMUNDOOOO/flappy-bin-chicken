@@ -10,15 +10,17 @@
 
 // Pipe attributes.
 #define PIPE_DELTA_X 180
-#define PIPE_DELTA_Y 175
+#define PIPE_DELTA_Y 150
 #define PIPE_WIDTH 80
-#define PIPE_MS 150
+#define PIPE_MS 120
 
 typedef struct Pipe
 {
 	// The positions from which the pipe will be rendered and their size (l x h).
 	Vector2 upperPosition; 
 	Vector2 lowerPosition;
+	Rectangle upperBody;
+	Rectangle lowerBody;
 } Pipe;
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX);
@@ -72,6 +74,7 @@ int main(void)
 		// Applying movement to bird and pipes.
 		ApplyGravity(player, GetFrameTime());
 		MovePipes(pipes, numPipes, GetFrameTime());
+		CheckCollisions(player, pipes, numPipes);
 
 		// Drawing.
 		BeginDrawing();
@@ -100,7 +103,7 @@ Bird* InitBird()
 		bird->body.y = bird->position.y;
 		bird->body.width = 30;
 		bird->body.height = 30;
-		bird->jumpStrength = 450;
+		bird->jumpStrength = 350;
 		bird->yVelocity = 0;
 	}
 
@@ -124,7 +127,20 @@ void ApplyGravity(Bird* bird, float deltaTime)
 
 void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes)
 {
-	
+	for (int i = 0; i < numPipes; ++i)
+	{
+		if (CheckCollisionRecs(bird->body, pipes[i].upperBody))
+		{
+			printf("Collision detected! \n");
+			CloseWindow();
+		}
+			
+		if (CheckCollisionRecs(bird->body, pipes[i].lowerBody))
+		{
+			printf("Collision detected! \n");
+			CloseWindow();
+		}
+	}
 }
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
@@ -142,8 +158,15 @@ void InitPipes(Pipe pipes[], const int numPipes)
 		{
 			pipes[i].upperPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
 			pipes[i].lowerPosition.x = GetScreenWidth() + (i * (PIPE_WIDTH + PIPE_DELTA_X));
+			pipes[i].upperBody.x = pipes[i].upperPosition.x;
+			pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
+			pipes[i].upperBody.width = PIPE_WIDTH;
+			pipes[i].upperBody.height = GetScreenHeight();
+			pipes[i].lowerBody.width = PIPE_WIDTH;
+			pipes[i].lowerBody.height = GetScreenHeight();
 
-			SetRandYPos(&pipes[i]);
+			pipes[i].upperBody.y = (GetScreenHeight() / 2 - 300) - GetScreenHeight();
+			pipes[i].lowerBody.y = (GetScreenHeight() / 2) + 300;
 		}
 	}
 }
@@ -155,12 +178,16 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 		for (int i = 0; i < numPipes; ++i)
 		{
 			pipes[i].upperPosition.x -= PIPE_MS * deltaTime;
+			pipes[i].upperBody.x = pipes[i].upperPosition.x;
 			pipes[i].lowerPosition.x -= PIPE_MS * deltaTime;
+			pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
 
 			if (pipes[i].upperPosition.x <= -PIPE_WIDTH)
 			{
 				pipes[i].upperPosition.x = GetScreenWidth();
+				pipes[i].upperBody.x = pipes[i].upperPosition.x;
 				pipes[i].lowerPosition.x = GetScreenWidth();
+				pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
 
 				SetRandYPos(&pipes[i]);
 			}
@@ -174,8 +201,8 @@ void DrawPipes(Pipe pipes[], const int numPipes)
 	{
 		for (int i = 0; i < numPipes; ++i)
 		{
-			DrawRectangle(pipes[i].upperPosition.x, pipes[i].upperPosition.y, PIPE_WIDTH, GetScreenHeight(), RAYWHITE);
-			DrawRectangle(pipes[i].lowerPosition.x, pipes[i].lowerPosition.y, PIPE_WIDTH, GetScreenHeight(), RAYWHITE);
+			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, RED);
+			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
 		}
 	}
 }
@@ -188,4 +215,6 @@ void SetRandYPos(Pipe* pipe)
 	int randY =  minPosY + (rand() % (maxPosY - minPosY));
 	pipe->upperPosition.y = randY - GetScreenHeight();
 	pipe->lowerPosition.y = randY + PIPE_DELTA_Y;
+	pipe->upperBody.y = pipe->upperPosition.y;
+	pipe->lowerBody.y = pipe->lowerPosition.y;
 }
