@@ -14,6 +14,8 @@
 #define PIPE_WIDTH 80
 #define PIPE_MS 120
 
+bool exitWindow = false;
+
 typedef struct Pipe
 {
 	// The positions from which the pipe will be rendered and their size (l x h).
@@ -64,7 +66,7 @@ int main(void)
 	InitPipes(pipes, numPipes);
 	
 	// Tick.
-	while (!WindowShouldClose())
+	while (!exitWindow)
 	{
 		if (IsKeyPressed(KEY_SPACE))
 		{
@@ -132,13 +134,13 @@ void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes)
 		if (CheckCollisionRecs(bird->body, pipes[i].upperBody))
 		{
 			printf("Collision detected! \n");
-			CloseWindow();
+			exitWindow = true;
 		}
 			
 		if (CheckCollisionRecs(bird->body, pipes[i].lowerBody))
 		{
 			printf("Collision detected! \n");
-			CloseWindow();
+			exitWindow = true;
 		}
 	}
 }
