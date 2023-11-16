@@ -46,6 +46,7 @@ typedef struct Bird
 	 */
 	int jumpStrength;
 	float yVelocity;
+	int score;
 } Bird;
 
 Bird* InitBird();
@@ -78,12 +79,14 @@ int main(void)
 		ApplyGravity(player, GetFrameTime());
 		MovePipes(pipes, numPipes, GetFrameTime());
 		CheckCollisions(player, pipes, numPipes);
+		char scoreStr[20];
+		sprintf(scoreStr, "%d", player->score);
 
 		// Drawing.
 		BeginDrawing();
 		ClearBackground(BLACK);
-		// DrawRectangleV(player->position, player->size, GOLD);
 		DrawRectanglePro(player->body, (Vector2){ player->body.width / 2, player->body.height / 2 }, 0, GOLD);
+		DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 12, RAYWHITE);
 		DrawPipes(pipes, numPipes);
 		EndDrawing();
 	}
@@ -108,6 +111,7 @@ Bird* InitBird()
 		bird->body.height = 30;
 		bird->jumpStrength = 350;
 		bird->yVelocity = 0;
+		bird->score = 0;
 	}
 
 	return bird;
@@ -143,6 +147,8 @@ void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes)
 			printf("Collision detected! \n");
 			exitWindow = true;
 		}
+
+		if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) bird->score++;
 	}
 }
 
