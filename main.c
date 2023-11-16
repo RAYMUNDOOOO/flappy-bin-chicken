@@ -32,7 +32,7 @@ typedef struct Bird
 {
 	// The position from which the bird will be rendered and its size (l x h).
 	Vector2 position;
-	Vector2 size;
+	Rectangle body;
 
 	/*
 	 * The JUMP_STRENGTH will be used to set the vertical velocity of the bird
@@ -46,6 +46,7 @@ typedef struct Bird
 Bird* InitBird();
 void Jump(Bird* bird);
 void ApplyGravity(Bird* bird, float deltaTime);
+void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes);
 
 int main(void)
 {
@@ -75,7 +76,8 @@ int main(void)
 		// Drawing.
 		BeginDrawing();
 		ClearBackground(BLACK);
-		DrawRectangleV(player->position, player->size, GOLD);
+		// DrawRectangleV(player->position, player->size, GOLD);
+		DrawRectanglePro(player->body, (Vector2){ player->body.width / 2, player->body.height / 2 }, 0, GOLD);
 		DrawPipes(pipes, numPipes);
 		EndDrawing();
 	}
@@ -94,8 +96,10 @@ Bird* InitBird()
 	{
 		bird->position.x = GetScreenWidth() * 0.1;
 		bird->position.y = GetScreenHeight() / 2;
-		bird->size.x = 30;
-		bird->size.y = 30;
+		bird->body.x = bird->position.x;
+		bird->body.y = bird->position.y;
+		bird->body.width = 30;
+		bird->body.height = 30;
 		bird->jumpStrength = 450;
 		bird->yVelocity = 0;
 	}
@@ -113,8 +117,14 @@ void ApplyGravity(Bird* bird, float deltaTime)
 	if (bird != NULL)
 	{
 		bird->position.y -= bird->yVelocity * deltaTime;
+		bird->body.y = bird->position.y;
 		bird->yVelocity -= GRAVITY * deltaTime;
 	}
+}
+
+void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes)
+{
+	
 }
 
 int GetNumPipes(const int screenWidth, const int pipeWidth, const int pipeDeltaX)
