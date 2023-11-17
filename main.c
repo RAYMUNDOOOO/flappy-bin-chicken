@@ -15,6 +15,7 @@
 #define PIPE_MS 120
 
 bool exitWindow = false;
+bool scored = false;
 
 typedef struct Pipe
 {
@@ -47,6 +48,7 @@ typedef struct Bird
 	int jumpStrength;
 	float yVelocity;
 	int score;
+	Rectangle* collidedScoreBody;
 } Bird;
 
 Bird* InitBird();
@@ -93,6 +95,8 @@ int main(void)
 
 	free(player);
 	player = NULL;
+	free(player->collidedScoreBody);
+	player->collidedScoreBody = NULL;
 
 	CloseWindow();
 	return 0;
@@ -112,6 +116,7 @@ Bird* InitBird()
 		bird->jumpStrength = 350;
 		bird->yVelocity = 0;
 		bird->score = 0;
+		bird->collidedScoreBody = (Rectangle*)malloc(sizeof(Rectangle));
 	}
 
 	return bird;
@@ -148,7 +153,20 @@ void CheckCollisions(Bird* bird, Pipe pipes[], const int numPipes)
 			exitWindow = true;
 		}
 
-		if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) bird->score++;
+		if (CheckCollisionRecs(bird->body, pipes[i].scoreBody))
+		{	
+			if (scored == false)
+			{
+				bird->collidedScoreBody = &pipes[i].scoreBody;
+				bird->score++;
+				scored = true;
+			}
+		}	
+	}
+
+	if (!CheckCollisionRecs(bird->body, *bird->collidedScoreBody))
+	{
+		scored = false;
 	}
 }
 
