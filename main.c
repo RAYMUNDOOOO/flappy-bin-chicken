@@ -88,8 +88,8 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 		DrawRectanglePro(player->body, (Vector2){ player->body.width / 2, player->body.height / 2 }, 0, GOLD);
-		DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 12, RAYWHITE);
 		DrawPipes(pipes, numPipes);
+		DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 24, RAYWHITE);
 		EndDrawing();
 	}
 
@@ -214,7 +214,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
 			pipes[i].scoreBody.x = pipes[i].lowerPosition.x; // I'm a dumbass.
 
-			if (pipes[i].upperPosition.x <= -PIPE_WIDTH)
+			if (pipes[i].upperPosition.x <= -(PIPE_WIDTH + PIPE_WIDTH + PIPE_DELTA_X))
 			{
 				pipes[i].upperPosition.x = GetScreenWidth();
 				pipes[i].upperBody.x = pipes[i].upperPosition.x;
@@ -234,9 +234,8 @@ void DrawPipes(Pipe pipes[], const int numPipes)
 	{
 		for (int i = 0; i < numPipes; ++i)
 		{
-			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, RED);
+			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
 			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
-			DrawRectanglePro(pipes[i].scoreBody, (Vector2){ 0, 0 }, 0, YELLOW);
 		}
 	}
 }
