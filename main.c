@@ -175,10 +175,10 @@ void InitPipes(Pipe pipes[], const int numPipes)
 			pipes[i].lowerBody.height = GetScreenHeight();
 			pipes[i].scoreBody.x = pipes[i].upperPosition.x - 300;
 			pipes[i].scoreBody.width = PIPE_WIDTH;
-			pipes[i].scoreBody.height = PIPE_DELTA_Y + 50;
+			pipes[i].scoreBody.height = PIPE_DELTA_Y;
 
-			pipes[i].upperBody.y = (GetScreenHeight() / 2 - 100) - GetScreenHeight();
-			pipes[i].lowerBody.y = (GetScreenHeight() / 2) + 100;
+			pipes[i].upperBody.y = (GetScreenHeight() / 2 - 75) - GetScreenHeight();
+			pipes[i].lowerBody.y = (GetScreenHeight() / 2) + 75;
 			pipes[i].scoreBody.y = pipes[i].upperBody.y + GetScreenHeight();
 		}
 	}
@@ -194,7 +194,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 			pipes[i].upperBody.x = pipes[i].upperPosition.x;
 			pipes[i].lowerPosition.x -= PIPE_MS * deltaTime;
 			pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
-			// pipes[i].scoreBody.x -= pipes[i].lowerPosition.x;
+			pipes[i].scoreBody.x = pipes[i].lowerPosition.x; // I'm a dumbass.
 
 			if (pipes[i].upperPosition.x <= -PIPE_WIDTH)
 			{
@@ -202,7 +202,7 @@ void MovePipes(Pipe pipes[], const int numPipes, const float deltaTime)
 				pipes[i].upperBody.x = pipes[i].upperPosition.x;
 				pipes[i].lowerPosition.x = GetScreenWidth();
 				pipes[i].lowerBody.x = pipes[i].lowerPosition.x;
-				// pipes[i].scoreBody.x = pipes[i].lowerPosition.x;
+				pipes[i].scoreBody.x = pipes[i].lowerPosition.x;
 
 				SetRandYPos(&pipes[i]);
 			}
@@ -233,5 +233,5 @@ void SetRandYPos(Pipe* pipe)
 	pipe->lowerPosition.y = randY + PIPE_DELTA_Y;
 	pipe->upperBody.y = pipe->upperPosition.y;
 	pipe->lowerBody.y = pipe->lowerPosition.y;
-	// pipe->scoreBody.y = pipe->upperPosition.y + GetScreenHeight();
+	pipe->scoreBody.y = pipe->upperPosition.y + GetScreenHeight();
 }
