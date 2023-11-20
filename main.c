@@ -72,6 +72,8 @@ int main(void)
 	// Tick.
 	while (!exitWindow)
 	{
+		if (IsKeyPressed(KEY_ESCAPE) || WindowShouldClose()) exitWindow = true;
+		
 		if (IsKeyPressed(KEY_SPACE))
 		{
 			Jump(player);
