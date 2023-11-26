@@ -1,18 +1,24 @@
-CC = gcc
-LIBS := 
-LDFLAGS := 
+RAYLIB_SRC_DIR = raylib/src
+GAME_DIR = game
+PROJECTS := raylib game
 
-ifeq ($(OS), Windows_NT)
-	LIBS += -llibraylib -lopengl32 -lgdi32 -lwinmm
-	LDFLAGS += -L.
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S), Linux)
-		LIBS += -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
-	endif
-endif
+.PHONY: all clean $(PROJECTS)
 
-flappybinchicken: main.c raylib.h
-	$(CC) -o flappybinchicken main.c $(LDFLAGS) $(LIBS)
-	$(info FlappyBinChicken successfully compiled!)
+all: $(PROJECTS)
 
+# Builds makefile found in raylib/src.
+raylib:
+	@echo building raylib
+	@${MAKE} --no-print-directory -C $(RAYLIB_SRC_DIR) -f makefile
+
+# Builds makefile found in game/.
+game:
+	@echo building game
+	@${MAKE} --no-print-directory -C $(GAME_DIR) -f makefile
+
+# Deletes generated object files and executables.
+clean:
+	@echo cleaning raylib
+	@${MAKE} --no-print-directory -C $(RAYLIB_SRC_DIR) -f makefile clean
+	@echo cleaning game
+	@${MAKE} --no-print-directory -C $(GAME_DIR) -f makefile clean
