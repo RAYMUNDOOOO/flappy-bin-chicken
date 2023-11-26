@@ -12,7 +12,7 @@ void SetRandYPos(Pipe* p, const int SCREEN_H, const int SCREEN_W);
 
 void Init(Pipe pipes[], const int NUM_PIPES) 
 {
-	if (numPipes > 0)
+	if (NUM_PIPES > 0)
 	{
 		const int MIDDLE_SCREEN_Y = GetScreenHeight() / 2; 
 		const int MIDDLE_SCREEN_X = GetScreenWidth() / 2;
