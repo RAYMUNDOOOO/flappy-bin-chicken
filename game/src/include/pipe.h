@@ -7,4 +7,5 @@ typedef struct Pipe
 
 void Init(Pipe pipes[], const int NUM_PIPES);
 void Tick(Pipe pipes[], const float DELTA_TIME);
-void Draw(Pipe pipes[], const int NUM_PIPES);
+void Draw(Pipe pipes[]);
+int GetNumPipes(cont int SCREEN_W);

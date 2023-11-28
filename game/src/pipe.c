@@ -9,7 +9,6 @@
 #define PIPE_MS 120
 
 // DECLARATIONS
-int GetNumPipes(const int SCREEN_W);
 void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME);
 void SetRandYPos(Pipe* p, const int SCREEN_H, const int SCREEN_W);
 void ResetPipeX(Pipe* p);
@@ -49,7 +48,7 @@ void Tick(Pipe pipes[], const float DELTA_TIME)
 	Move(pipes, sizeof(pipes) / sizeof(pipes[0]), DELTA_TIME);
 }
 
-void Draw(Pipe pipes[], const float DELTA_TIME)
+void Draw(Pipe pipes[])
 {
 	if (sizeof(*pipes) > 0)
 	{
