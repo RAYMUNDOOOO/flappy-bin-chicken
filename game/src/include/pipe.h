@@ -5,7 +5,7 @@ typedef struct Pipe
 	Rectangle scoreBody;
 } Pipe;
 
-void Init(Pipe pipes[], const int NUM_PIPES);
-void Tick(Pipe pipes[], const float DELTA_TIME);
-void Draw(Pipe pipes[]);
+void InitPipe(Pipe pipes[], const int NUM_PIPES);
+void TickPipe(Pipe pipes[], const float DELTA_TIME);
+void DrawPipe(Pipe pipes[]);
 int GetNumPipes(cont int SCREEN_W);

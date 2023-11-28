@@ -7,6 +7,6 @@ typedef struct Bird
 	int gravity;
 } Bird;
 
-void Init(Bird* bird);
-void Tick(Bird* bird, const float DELTA_TIME);
-void Draw(Bird* bird);
+void InitBird(Bird* bird);
+void TickBird(Bird* bird, const float DELTA_TIME);
+void DrawBird(Bird* bird);

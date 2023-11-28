@@ -6,7 +6,7 @@ void PrepareJump(Bird* bird);
 void ApplyVelocities(Bird* bird, const float DELTA_TIME);
 
 // DEFINITIONS
-void Init(Bird* bird)
+void InitBird(Bird* bird)
 {
 	if (bird != NULL)
 	{
@@ -21,14 +21,14 @@ void Init(Bird* bird)
 	}
 }
 
-void Tick(Bird* bird, const float DELTA_TIME)
+void TickBird(Bird* bird, const float DELTA_TIME)
 {
 	if (IsKeyPressed(KEY_SPACE)) PrepareJump(bird);
 
 	ApplyVelocities(bird, DELTA_TIME);
 }
 
-void Draw(Bird* bird)
+void DrawBird(Bird* bird)
 {
 	DrawRectanglePro(bird->body, (Vector2){ player->body.width / 2, player->body.height / 2 }, 0, GOLD);
 }

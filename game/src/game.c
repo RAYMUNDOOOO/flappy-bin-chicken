@@ -6,24 +6,24 @@
 Bird* bird;
 Pipe* pipes[];
 
-void Init()
+void InitGame()
 {
 	bird = (Bird*)malloc(sizeof(Bird));
-	Init(bird);
+	InitBird(bird);
 
 	const int NUM_PIPES = GetNumPipes(GetScreenWidth());
 	pipes = malloc(NUM_PIPES * sizeof(Pipe));
-	Init(*pipes, NUM_PIPES);
+	InitPipe(*pipes, NUM_PIPES);
 }
 
-void Tick(const float DELTA_TIME)
+void TickGame(const float DELTA_TIME)
 {
-	Tick(bird, DELTA_TIME);
-	Tick(*pipes, DELTA_TIME);
+	TickBird(bird, DELTA_TIME);
+	TickPipe(*pipes, DELTA_TIME);
 }
 
-void Draw()
+void DrawGame()
 {
-	Draw(bird);
-	Draw(*pipes);
+	DrawBird(bird);
+	DrawPipe(*pipes);
 }
