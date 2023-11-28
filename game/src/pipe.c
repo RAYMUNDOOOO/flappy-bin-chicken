@@ -14,6 +14,7 @@ void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME);
 void SetRandYPos(Pipe* p, const int SCREEN_H, const int SCREEN_W);
 void ResetPipeX(Pipe* p);
 
+// DEFINITIONS
 void Init(Pipe pipes[], const int NUM_PIPES) 
 {
 	if (NUM_PIPES > 0)
