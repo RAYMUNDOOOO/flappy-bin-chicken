@@ -16,12 +16,12 @@ RAYLIB_PATH = ../raylib
 # Define include paths for required headers.
 # RAYLIB_PATH adjustment for different platforms.
 ifeq ($(PLATFORM_OS), WINDOWS)
-	INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external
+	INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external 
 	LDFLAGS += -L. -L$(RAYLIB_PATH)/src
 	LDLIBS += -lraylib -lopengl32 -lgdi32 -lwinmm
 endif
 ifeq ($(PLATFORM_OS), LINUX)
-	INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)
+	INCLUDE_PATHS = -I. -I$(RAYLIB_PATH) 
 	LDFLAGS += -L$(RAYLIB_PATH)
 	LDLIBS += -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 endif
