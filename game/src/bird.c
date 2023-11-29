@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "bird.h"
+#include "stddef.h"
 
 // DECLARATIONS
 void PrepareJump(Bird* bird);
@@ -12,8 +13,8 @@ void InitBird(Bird* bird)
 	{
 		bird->body.x = GetScreenWidth() * 0.1;
 		bird->body.y = GetScreenHeight() / 2;
-		bird->width = 30;
-		bird->height = 30;
+		bird->body.width = 30;
+		bird->body.height = 30;
 		bird->jumpStrength = 350;
 		bird->yVelocity = 0;
 		bird->score = 0;
@@ -30,7 +31,7 @@ void TickBird(Bird* bird, const float DELTA_TIME)
 
 void DrawBird(Bird* bird)
 {
-	DrawRectanglePro(bird->body, (Vector2){ player->body.width / 2, player->body.height / 2 }, 0, GOLD);
+	DrawRectanglePro(bird->body, (Vector2){ bird->body.width / 2, bird->body.height / 2 }, 0, GOLD);
 }
 
 

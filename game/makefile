@@ -12,7 +12,7 @@ CC = gcc
 LDLIBS =
 LDFLAGS =
 RAYLIB_PATH = ../raylib
-SRC_FILES = src/main.c src/game.c src/pipe.c src/bird.c
+SRC_FILES = src/main.c src/game.c src/bird.c src/pipe.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 TARGET = flappybinchicken
 

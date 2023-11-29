@@ -37,7 +37,7 @@ int main(void)
 
 			case RUNNING:
 			{
-				TickGame();
+				TickGame(GetFrameTime());
 				DrawGame();
 			} break;
 

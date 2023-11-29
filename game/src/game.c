@@ -1,9 +1,11 @@
 #include "game.h"
 #include "bird.h"
 #include "pipe.h"
+#include "raylib.h"
+#include <stdlib.h>
 
 Bird* bird;
-Pipe* pipes[];
+Pipe* pipes;
 
 void InitGame()
 {
@@ -11,20 +13,20 @@ void InitGame()
 	InitBird(bird);
 
 	const int NUM_PIPES = GetNumPipes(GetScreenWidth());
-	pipes = malloc(NUM_PIPES * sizeof(Pipe));
-	InitPipe(*pipes, NUM_PIPES);
+	pipes = (Pipe*)malloc(NUM_PIPES * sizeof(Pipe));
+	InitPipe(pipes, NUM_PIPES);
 }
 
 void TickGame(const float DELTA_TIME)
 {
 	TickBird(bird, DELTA_TIME);
-	TickPipe(*pipes, DELTA_TIME);
+	TickPipe(pipes, DELTA_TIME);
 }
 
 void DrawGame()
 {
 	DrawBird(bird);
-	DrawPipe(*pipes);
+	DrawPipe(pipes);
 }
 
 void CleanGame()

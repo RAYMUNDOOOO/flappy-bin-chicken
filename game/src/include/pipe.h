@@ -1,3 +1,5 @@
+#include "raylib.h"
+
 typedef struct Pipe
 {
 	Rectangle upperBody;
@@ -5,7 +7,7 @@ typedef struct Pipe
 	Rectangle scoreBody;
 } Pipe;
 
-void InitPipe(Pipe pipes[], const int NUM_PIPES);
-void TickPipe(Pipe pipes[], const float DELTA_TIME);
-void DrawPipe(Pipe pipes[]);
-int GetNumPipes(cont int SCREEN_W);
+void InitPipe(Pipe* pipes, const int NUM_PIPES);
+void TickPipe(Pipe* pipes, const float DELTA_TIME);
+void DrawPipe(Pipe* pipes);
+int GetNumPipes(const int SCREEN_W);

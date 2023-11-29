@@ -1,3 +1,5 @@
+#include "raylib.h"
+
 typedef struct Bird
 {
 	Rectangle body;

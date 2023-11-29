@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "raylib.h"
 #include "pipe.h"
 
@@ -10,7 +11,7 @@
 
 // DECLARATIONS
 void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME);
-void SetRandYPos(Pipe* p, const int SCREEN_H, const int SCREEN_W);
+void SetRandYPos(Pipe* p, const int SCREEN_H);
 void ResetPipeX(Pipe* p);
 
 // DEFINITIONS
@@ -21,7 +22,7 @@ void Init(Pipe pipes[], const int NUM_PIPES)
 		const int MIDDLE_SCREEN_Y = GetScreenHeight() / 2; 
 		const int MIDDLE_SCREEN_X = GetScreenWidth() / 2;
 
-		for (int i = 0; i < numPipes; ++i)
+		for (int i = 0; i < NUM_PIPES; ++i)
 		{
 			// Spawn position starts from end of screen and then translates depending on which pipe we're spawning.
 			const int X = MIDDLE_SCREEN_X + (i * (PIPE_W + PIPE_DX));
@@ -38,17 +39,17 @@ void Init(Pipe pipes[], const int NUM_PIPES)
 			pipes[i].scoreBody.width = PIPE_W;
 			pipes[i].scoreBody.height = PIPE_H;
 
-			SetRandYPos(Pipe* pipe, const int SCREEN_H, const int SCREEN_W);
+			SetRandYPos(&pipes[i], GetScreenHeight());
 		}
 	}
 }				
 
-void Tick(Pipe pipes[], const float DELTA_TIME)
+void Tick(Pipe* pipes, const float DELTA_TIME)
 {
 	Move(pipes, sizeof(pipes) / sizeof(pipes[0]), DELTA_TIME);
 }
 
-void Draw(Pipe pipes[])
+void Draw(Pipe* pipes)
 {
 	if (sizeof(*pipes) > 0)
 	{
@@ -65,7 +66,7 @@ int GetNumPipes(const int SCREEN_W)
 	return (SCREEN_W / (PIPE_W + PIPE_DX));
 }
 
-void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME)
+void Move(Pipe* pipes, const int NUM_PIPES, const float DELTA_TIME)
 {
 	if (NUM_PIPES > 0)
 	{
@@ -78,7 +79,7 @@ void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME)
 			if (pipes[i].upperBody.x <= -(PIPE_W + PIPE_W + PIPE_DX))
 			{
 				ResetPipeX(&pipes[i]);
-				SetRandYPos(&pipes[i]);
+				SetRandYPos(&pipes[i], GetScreenHeight());
 			}
 		}
 	}
@@ -89,7 +90,7 @@ void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME)
  * so we can avoid pipes spawning too far away from each other and being impossible
  * for the player to reach.
  */
-void SetRandYPos(Pipe* p, const int SCREEN_H, const int SCREEN_W)
+void SetRandYPos(Pipe* p, const int SCREEN_H)
 {
 	const int MAX_POS_Y = (SCREEN_H / 2) + (SCREEN_H * 0.3);
 	const int MIN_POS_Y = (SCREEN_H / 2) - (SCREEN_H * 0.3);
