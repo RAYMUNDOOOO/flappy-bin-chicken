@@ -31,12 +31,14 @@ int main(void)
 		{
 			case MAIN_MENU:
 			{
-				// TODO: Implement a main menu.
+				InitGame();
+				applicationState = RUNNING;
 			} break;
 
 			case RUNNING:
 			{
-				// TODO: Implement game loop.
+				TickGame();
+				DrawGame();
 			} break;
 
 			case PAUSED:
@@ -51,7 +53,7 @@ int main(void)
 
 			case QUITTING:
 			{
-				// TODO: Implementing total obliteration.
+				CleanGame();
 			} break;
 		}
 	}

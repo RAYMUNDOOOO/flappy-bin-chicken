@@ -1,7 +1,6 @@
 #include "game.h"
 #include "bird.h"
 #include "pipe.h"
-#include "raylib.h"
 
 Bird* bird;
 Pipe* pipes[];
@@ -26,4 +25,12 @@ void DrawGame()
 {
 	DrawBird(bird);
 	DrawPipe(*pipes);
+}
+
+void CleanGame()
+{
+	free(bird);
+	bird = NULL;
+	free(pipes);
+	pipes = NULL;
 }
