@@ -27,6 +27,7 @@ int main(void)
 
 	while (!WindowShouldClose() && applicationState != QUITTING)
 	{
+		if (IsKeyPressed(KEY_ESCAPE)) applicationState = QUITTING;
 		switch (applicationState)
 		{
 			case MAIN_MENU:
@@ -38,7 +39,10 @@ int main(void)
 			case RUNNING:
 			{
 				TickGame(GetFrameTime());
+
+				BeginDrawing();
 				DrawGame();
+				EndDrawing();
 			} break;
 
 			case PAUSED:
@@ -50,13 +54,12 @@ int main(void)
 			{
 				// TODO: Implement game over menu.
 			} break;
-
-			case QUITTING:
-			{
-				CleanGame();
-			} break;
 		}
 	}
+
+	CleanGame();
+	CloseWindow();
+	return 0;
 }
 
 void SetupWindow()
