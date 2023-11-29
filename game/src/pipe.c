@@ -15,7 +15,7 @@ void SetRandYPos(Pipe* p, const int SCREEN_H);
 void ResetPipeX(Pipe* p);
 
 // DEFINITIONS
-void Init(Pipe pipes[], const int NUM_PIPES) 
+void InitPipe(Pipe* pipes, const int NUM_PIPES) 
 {
 	if (NUM_PIPES > 0)
 	{
@@ -44,12 +44,12 @@ void Init(Pipe pipes[], const int NUM_PIPES)
 	}
 }				
 
-void Tick(Pipe* pipes, const float DELTA_TIME)
+void TickPipe(Pipe* pipes, const float DELTA_TIME)
 {
 	Move(pipes, sizeof(pipes) / sizeof(pipes[0]), DELTA_TIME);
 }
 
-void Draw(Pipe* pipes)
+void DrawPipe(Pipe* pipes)
 {
 	if (sizeof(*pipes) > 0)
 	{
