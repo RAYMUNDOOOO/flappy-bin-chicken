@@ -32,14 +32,12 @@ endif
 $(TARGET): $(OBJ_FILES)
 	$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS) $(INCLUDE_PATHS)
 
+main.o: main.c game.o pipe.o bird.o
+	$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS) $(INCLUDE_PATHS)
+
 %.o: %.c
 	$(CC) -o $@ -c $< $(LDFLAGS) $(LDLIBS) $(INCLUDE_PATHS)
 
-# flappybinchicken: main.c game.c bird.c pipe.c
-# $(CC) -o flappybinchicken main.c game.c bird.c pipe.c $(LDFLAGS) $(LDLIBS) $(INCLUDE_PATHS)
-# @echo FlappyBinChicken successfully compiled!
-
 .PHONY: clean
-
 clean:
 	@echo Cleaning game.
