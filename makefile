@@ -1,5 +1,5 @@
 RAYLIB_DIR := raylib
-SRC_DIR := game/src
+SRC_DIR := src
 BUILD_DIR = _build
 PROJECTS = raylib $(TARGET)
 CC := gcc
