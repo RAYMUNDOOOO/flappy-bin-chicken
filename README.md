@@ -10,7 +10,7 @@ To learn about game dev in C.
 
 ## Building
 
-1. Install raylib for your desired platform.
-    - current supported platforms are windows and linux. 
-    - see [build and installation](<https://github.com/raysan5/raylib#build-and-installation>)
-1. Check the makefile paths to make sure they agree with the installation. 
+1. Ensure that you have CMake installed and that it is at least version 3.20.
+2. From the root directory of this project, create a new directory called `build` and change directories into it.
+3. From the command line, call `cmake ..`. If **raylib** has not been installed already, it will clone it and include its `CMakeLists.txt` into the build process of this project.
+4. Run the `FlappyBinChicken` executable from `build` directory you created.
