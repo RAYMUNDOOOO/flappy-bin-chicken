@@ -10,19 +10,19 @@
 #define PIPE_MS 120
 
 // DECLARATIONS
-void Move(Pipe pipes[], const int NUM_PIPES, const float DELTA_TIME);
+void Move(Pipe* pipes, int numPipes, const float DELTA_TIME);
 void SetRandYPos(Pipe* p, const int SCREEN_H);
 void ResetPipeX(Pipe* p);
 
 // DEFINITIONS
-void InitPipe(Pipe* pipes, const int NUM_PIPES) 
+void InitPipe(Pipe* pipes, int numPipes) 
 {
-	if (NUM_PIPES > 0)
+	if (numPipes > 0)
 	{
 		const int MIDDLE_SCREEN_Y = GetScreenHeight() / 2; 
 		const int MIDDLE_SCREEN_X = GetScreenWidth() / 2;
 
-		for (int i = 0; i < NUM_PIPES; ++i)
+		for (int i = 0; i < numPipes; ++i)
 		{
 			// Spawn position starts from end of screen and then translates depending on which pipe we're spawning.
 			const int X = MIDDLE_SCREEN_X + (i * (PIPE_W + PIPE_DX));
@@ -44,33 +44,33 @@ void InitPipe(Pipe* pipes, const int NUM_PIPES)
 	}
 }				
 
-void TickPipe(Pipe* pipes, const float DELTA_TIME)
+void TickPipe(Pipe* pipes, int numPipes, const float DELTA_TIME)
 {
-	Move(pipes, sizeof(pipes) / sizeof(pipes[0]), DELTA_TIME);
+	Move(pipes, numPipes, DELTA_TIME);
 }
 
-void DrawPipe(Pipe* pipes)
+void DrawPipe(Pipe* pipes, int numPipes)
 {
-	if (sizeof(*pipes) > 0)
+	if (numPipes > 0)
 	{
-		for (int i = 0; i < sizeof(pipes) / sizeof(pipes[0]); ++i)
+		for (int i = 0; i < numPipes; ++i)
 		{
-			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
-			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, RAYWHITE);
+			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, BLACK);
+			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, BLACK);
 		}
 	}
 }
 
 int GetNumPipes(const int SCREEN_W)
 {
-	return (SCREEN_W / (PIPE_W + PIPE_DX));
+	return (SCREEN_W / (PIPE_W + PIPE_DX)) + 2;
 }
 
-void Move(Pipe* pipes, const int NUM_PIPES, const float DELTA_TIME)
+void Move(Pipe* pipes, int numPipes, const float DELTA_TIME)
 {
-	if (NUM_PIPES > 0)
+	if (numPipes > 0)
 	{
-		for (int i = 0; i < NUM_PIPES; ++i)
+		for (int i = 0; i < numPipes; ++i)
 		{
 			pipes[i].upperBody.x -= PIPE_MS * DELTA_TIME;
 			pipes[i].lowerBody.x -= PIPE_MS * DELTA_TIME;
