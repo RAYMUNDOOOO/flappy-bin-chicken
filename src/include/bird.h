@@ -7,6 +7,8 @@ typedef struct Bird
 	float yVelocity;
 	int score;
 	int gravity;
+	float rotation;
+	float rotationRate;
 } Bird;
 
 void InitBird(Bird* bird);

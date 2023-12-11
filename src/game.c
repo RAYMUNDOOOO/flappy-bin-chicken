@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include <stdlib.h>
 
+int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
 

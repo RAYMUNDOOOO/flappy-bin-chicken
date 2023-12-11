@@ -41,6 +41,7 @@ int main(void)
 				TickGame(GetFrameTime());
 
 				BeginDrawing();
+				DrawFPS(10, 10);
 				ClearBackground(RAYWHITE);
 				DrawGame();
 				EndDrawing();
