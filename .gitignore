@@ -68,3 +68,6 @@ _deps
 # Build directory
 _build/
 build/
+
+# Clangd
+.cache/*

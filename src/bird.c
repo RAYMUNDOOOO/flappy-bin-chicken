@@ -19,10 +19,10 @@ void InitBird(Bird* bird)
 		bird->body.y = GetScreenHeight() / 2;
 		bird->body.width = 30;
 		bird->body.height = 30;
-		bird->jumpStrength = 350;
+		bird->jumpStrength = 550;
 		bird->yVelocity = 0;
 		bird->score = 0;
-		bird->gravity = 980;
+		bird->gravity = 980 * 2;
 		bird->rotation = 0;
 		bird->rotationRate = 100;
 	}

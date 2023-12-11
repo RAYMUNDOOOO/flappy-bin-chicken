@@ -3,11 +3,12 @@
 #include "pipe.h"
 
 // CONSTANTS
-#define PIPE_DX 180
+#define PIPE_DX 480
 #define PIPE_DY 150
 #define PIPE_W 80
 #define PIPE_H GetScreenHeight()
-#define PIPE_MS 120
+#define PIPE_MS 520
+
 
 // DECLARATIONS
 void Move(Pipe* pipes, int numPipes, const float DELTA_TIME);

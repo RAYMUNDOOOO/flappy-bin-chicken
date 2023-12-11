@@ -4,6 +4,11 @@ set(CMAKE_C_STANDARD 99)
 
 # Adding code completion for clangd.
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+file(CREATE_LINK
+	"${CMAKE_BINARY_DIR}/compile_commands.json"
+	"${CMAKE_SOURCE_DIR}/compile_commands.json"
+	SYMBOLIC
+)
 
 # Adding raylib.
 include(FetchContent)

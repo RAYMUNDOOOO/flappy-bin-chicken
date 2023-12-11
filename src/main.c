@@ -4,8 +4,8 @@
 #include <stdlib.h>
 
 // Screen attributes.
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 900
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
 
 typedef enum 
 {
