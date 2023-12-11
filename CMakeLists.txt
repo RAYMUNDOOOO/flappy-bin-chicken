@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.20)
 project(FlappyBinChicken C)
 set(CMAKE_C_STANDARD 99)
+
+# Adding code completion for clangd.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Adding raylib.
 include(FetchContent)
@@ -25,9 +28,6 @@ endif()
 # Adding our source files.
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*.c")
 set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/src/include")
-
-# Adding code completion for clangd.
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Declaring our executable.
 add_executable(${PROJECT_NAME})
