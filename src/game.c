@@ -8,6 +8,9 @@ int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
 
+void QueryCollisions(const Bird* bird, const Pipe* pipes);
+void AddScore(const int value);
+
 void InitGame()
 {
 	bird = (Bird*)malloc(sizeof(Bird));
@@ -36,4 +39,12 @@ void CleanGame()
 	bird = NULL;
 	free(pipes);
 	pipes = NULL;
+}
+
+void QueryCollisions(const Bird* bird, const Pipe* pipes)
+{
+}
+
+void AddScore(const int value)
+{
 }
