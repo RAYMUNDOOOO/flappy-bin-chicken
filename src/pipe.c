@@ -9,7 +9,6 @@
 #define PIPE_H GetScreenHeight()
 #define PIPE_MS 520
 
-
 // DECLARATIONS
 void Move(Pipe* pipes, int numPipes, const float DELTA_TIME);
 void SetRandYPos(Pipe* p, const int SCREEN_H);
