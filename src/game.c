@@ -56,7 +56,7 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	
 				AddScore(1);
-				pipes[i].scoreBody.y = GetScreenHeight();
+				pipes[i].scoreBody.y = 0;
 			}
 		}
 	}
