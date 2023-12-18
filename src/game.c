@@ -9,9 +9,9 @@ int score = 0;
 int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
-static Rectangle* collidedScoreBody = NULL;
 
-void QueryCollisions(const Bird* bird, const Pipe* pipes);
+
+void QueryCollisions(const Bird* bird, Pipe* pipes);
 void AddScore(const int value);
 
 void InitGame()
@@ -45,7 +45,7 @@ void CleanGame()
 	pipes = NULL;
 }
 
-void QueryCollisions(const Bird* bird, const Pipe* pipes)
+void QueryCollisions(const Bird* bird, Pipe* pipes)
 {
 	if (numPipes > 0)
 	{
@@ -55,15 +55,8 @@ void QueryCollisions(const Bird* bird, const Pipe* pipes)
 			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) printf("Collision detected with lower body.\n");
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	
-				if (collidedScoreBody == NULL) 
-				{
-					collidedScoreBody = &pipes[i].scoreBody;
-					AddScore(1);
-				}
-				else if (!CheckCollisionRecs(bird->body, pipes[i].scoreBody))
-				{
-					collidedScoreBody = NULL;
-				}
+				AddScore(1);
+				pipes[i].scoreBody.y = GetScreenHeight();
 			}
 		}
 	}
