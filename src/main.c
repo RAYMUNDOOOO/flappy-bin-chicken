@@ -18,7 +18,7 @@ typedef enum
 
 // Declarations.
 void SetupWindow();
-
+void DisplayScore();
 
 int main(void)
 {
@@ -27,7 +27,12 @@ int main(void)
 
 	while (!WindowShouldClose() && applicationState != QUITTING)
 	{
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
+		DrawFPS(10, 10);
+
 		if (IsKeyPressed(KEY_ESCAPE)) applicationState = QUITTING;
+
 		switch (applicationState)
 		{
 			case MAIN_MENU:
@@ -39,12 +44,7 @@ int main(void)
 			case RUNNING:
 			{
 				TickGame(GetFrameTime());
-
-				BeginDrawing();
-				DrawFPS(10, 10);
-				ClearBackground(RAYWHITE);
 				DrawGame();
-				EndDrawing();
 			} break;
 
 			case PAUSED:
@@ -57,6 +57,8 @@ int main(void)
 				// TODO: Implement game over menu.
 			} break;
 		}
+		DisplayScore();
+		EndDrawing();
 	}
 
 	CleanGame();
@@ -69,4 +71,11 @@ void SetupWindow()
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Flappy Bin Chicken");
 	SetExitKey(0);
 	SetTargetFPS(144);
+}
+
+void DisplayScore()
+{
+	char scoreStr[8];
+	sprintf(scoreStr, "%d", GetScore());
+	DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 32, BLACK);
 }

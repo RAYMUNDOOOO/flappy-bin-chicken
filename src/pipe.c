@@ -35,9 +35,9 @@ void InitPipe(Pipe* pipes, int numPipes)
 			pipes[i].lowerBody.width = PIPE_W;
 			pipes[i].lowerBody.height = PIPE_H;
 
-			pipes[i].scoreBody.x = X;
-			pipes[i].scoreBody.width = PIPE_W;
-			pipes[i].scoreBody.height = PIPE_H;
+			pipes[i].scoreBody.x = X + (PIPE_W / 2);
+			pipes[i].scoreBody.width = 10;
+			pipes[i].scoreBody.height = PIPE_DY;
 
 			SetRandYPos(&pipes[i], GetScreenHeight());
 		}
@@ -57,6 +57,7 @@ void DrawPipe(Pipe* pipes, int numPipes)
 		{
 			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, BLACK);
 			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, BLACK);
+			DrawRectanglePro(pipes[i].scoreBody, (Vector2){ 0, 0 }, 0, YELLOW);
 		}
 	}
 }
@@ -105,5 +106,5 @@ void ResetPipeX(Pipe* p)
 {
 	p->upperBody.x = GetScreenWidth();
 	p->lowerBody.x = GetScreenWidth();
-	p->scoreBody.x = GetScreenWidth();
+	p->scoreBody.x = GetScreenWidth() + (PIPE_W / 2);
 }
