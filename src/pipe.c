@@ -57,7 +57,6 @@ void DrawPipe(Pipe* pipes, int numPipes)
 		{
 			DrawRectanglePro(pipes[i].upperBody, (Vector2){ 0, 0 }, 0, BLACK);
 			DrawRectanglePro(pipes[i].lowerBody, (Vector2){ 0, 0 }, 0, BLACK);
-			DrawRectanglePro(pipes[i].scoreBody, (Vector2){ 0, 0 }, 0, YELLOW);
 		}
 	}
 }
