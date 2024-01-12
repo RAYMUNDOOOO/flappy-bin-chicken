@@ -1,7 +1,7 @@
 #include "raylib.h"
+#include "main.h"
 #include "game.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 // Screen attributes.
 #define SCREEN_WIDTH 1366
@@ -15,6 +15,8 @@ typedef enum
 	GAME_OVER,
 	QUITTING
 } ApplicationState;
+ApplicationState applicationState = MAIN_MENU;
+
 
 // Declarations.
 void SetupWindow();
@@ -23,7 +25,6 @@ void DisplayScore();
 int main(void)
 {
 	SetupWindow();
-	ApplicationState applicationState = MAIN_MENU;
 
 	while (!WindowShouldClose() && applicationState != QUITTING)
 	{
@@ -49,13 +50,17 @@ int main(void)
 
 			case PAUSED:
 			{
-				// TODO: Implement pause menu.
 			} break;
 
 			case GAME_OVER:
 			{
-				// TODO: Implement game over menu.
+                DrawGame();
+                // TODO: Implement game over menu.
 			} break;
+
+            case QUITTING:
+            {
+            } break;
 		}
 		DisplayScore();
 		EndDrawing();
@@ -78,4 +83,9 @@ void DisplayScore()
 	char scoreStr[8];
 	sprintf(scoreStr, "%d", GetScore());
 	DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 32, BLACK);
+}
+
+void GameOver()
+{
+    applicationState = GAME_OVER; 
 }

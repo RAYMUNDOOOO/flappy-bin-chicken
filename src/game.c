@@ -1,6 +1,7 @@
 #include "game.h"
 #include "bird.h"
 #include "pipe.h"
+#include "main.h"
 #include "raylib.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -51,8 +52,10 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 	{
 		for (int i = 0; i < numPipes; i++)
 		{
-			if (CheckCollisionRecs(bird->body, pipes[i].upperBody)) printf("Collision detected with upper body.\n");
-			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) printf("Collision detected with lower body.\n");
+			if (CheckCollisionRecs(bird->body, pipes[i].upperBody)) GameOver();
+
+			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) GameOver();
+
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	
 				AddScore(1);
@@ -69,5 +72,5 @@ void AddScore(const int value)
 
 int GetScore()
 {
-	return score;
+	return score; 
 }
