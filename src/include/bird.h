@@ -14,3 +14,6 @@ typedef struct Bird
 void InitBird(Bird* bird);
 void TickBird(Bird* bird, const float DELTA_TIME);
 void DrawBird(Bird* bird);
+
+void EnableInput();
+void DisableInput();

@@ -55,13 +55,13 @@ int main(void)
 			case GAME_OVER:
 			{
                 DrawGame();
-                // TODO: Implement game over menu.
 			} break;
 
             case QUITTING:
             {
             } break;
 		}
+
 		DisplayScore();
 		EndDrawing();
 	}

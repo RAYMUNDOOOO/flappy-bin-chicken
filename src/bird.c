@@ -4,6 +4,7 @@
 
 const int MAX_ROT = -20;
 const int MIN_ROT = 65;
+bool inputEnabled = true;
 
 // DECLARATIONS
 void PrepareJump(Bird* bird);
@@ -30,7 +31,10 @@ void InitBird(Bird* bird)
 
 void TickBird(Bird* bird, const float DELTA_TIME)
 {
-	if (IsKeyPressed(KEY_SPACE)) PrepareJump(bird);
+    if (inputEnabled)
+    {
+        if (IsKeyPressed(KEY_SPACE)) PrepareJump(bird);
+    }
 
 	ApplyVelocities(bird, DELTA_TIME);
 	ApplyRotation(bird, DELTA_TIME);
@@ -66,4 +70,14 @@ void ApplyRotation(Bird* bird, const float DELTA_TIME)
 		bird->rotation += bird->rotationRate * DELTA_TIME;
 		if (bird->rotation >= MIN_ROT) bird->rotation = MIN_ROT;
 	}
+}
+
+void EnableInput()
+{
+    inputEnabled = true;
+}
+
+void DisableInput()
+{
+    inputEnabled = false;
 }

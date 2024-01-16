@@ -11,7 +11,6 @@ int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
 
-
 void QueryCollisions(const Bird* bird, Pipe* pipes);
 void AddScore(const int value);
 
