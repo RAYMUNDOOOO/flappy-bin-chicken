@@ -51,9 +51,9 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 	{
 		for (int i = 0; i < numPipes; i++)
 		{
-			if (CheckCollisionRecs(bird->body, pipes[i].upperBody)) GameOver();
+			if (CheckCollisionRecs(bird->body, pipes[i].upperBody)) DisableInput();
 
-			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) GameOver();
+			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) DisableInput();
 
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	
@@ -62,6 +62,11 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 			}
 		}
 	}
+
+    if (bird->body.y <= 0 || bird->body.y >= GetScreenHeight())
+    {
+        GameOver();
+    }
 }
 
 void AddScore(const int value)
