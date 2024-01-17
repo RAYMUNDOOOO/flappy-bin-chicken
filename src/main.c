@@ -20,7 +20,7 @@ ApplicationState applicationState = MAIN_MENU;
 
 // Declarations.
 void SetupWindow();
-void DisplayScore();
+void DrawScore();
 
 int main(void)
 {
@@ -62,7 +62,7 @@ int main(void)
             } break;
 		}
 
-		DisplayScore();
+		DrawScore();
 		EndDrawing();
 	}
 
@@ -78,7 +78,7 @@ void SetupWindow()
 	SetTargetFPS(144);
 }
 
-void DisplayScore()
+void DrawScore()
 {
 	char scoreStr[8];
 	sprintf(scoreStr, "%d", GetScore());
