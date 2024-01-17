@@ -33,8 +33,8 @@ void TickGame(const float DELTA_TIME)
 
 void DrawGame()
 {
-	DrawBird(bird);
 	DrawPipe(pipes, numPipes);
+	DrawBird(bird);
 }
 
 void CleanGame()
@@ -51,9 +51,12 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 	{
 		for (int i = 0; i < numPipes; i++)
 		{
-			if (CheckCollisionRecs(bird->body, pipes[i].upperBody)) DisableInput();
-
-			if (CheckCollisionRecs(bird->body, pipes[i].lowerBody)) DisableInput();
+            if (CheckCollisionRecs(bird->body, pipes[i].upperBody) || 
+                CheckCollisionRecs(bird->body, pipes[i].lowerBody))
+            {
+                DisableInput();
+                DisablePipeMovement();
+            }
 
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	

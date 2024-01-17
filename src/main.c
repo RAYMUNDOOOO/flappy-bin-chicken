@@ -87,5 +87,6 @@ void DisplayScore()
 
 void GameOver()
 {
+    // TODO: Present game over menu.
     applicationState = GAME_OVER; 
 }

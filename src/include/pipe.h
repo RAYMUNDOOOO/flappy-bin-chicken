@@ -11,3 +11,5 @@ void InitPipe(Pipe* pipes, int numPipes);
 void TickPipe(Pipe* pipes, int numPipes, const float DELTA_TIME);
 void DrawPipe(Pipe* pipes, int numPipes);
 int GetNumPipes(const int SCREEN_W);
+void DisablePipeMovement();
+void EnablePipeMovement();

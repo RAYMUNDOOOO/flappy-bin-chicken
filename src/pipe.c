@@ -9,6 +9,9 @@
 #define PIPE_H GetScreenHeight()
 #define PIPE_MS 520
 
+// ATTRIBUTES
+bool movementEnabled = true;
+
 // DECLARATIONS
 void Move(Pipe* pipes, int numPipes, const float DELTA_TIME);
 void SetRandYPos(Pipe* p, const int SCREEN_H);
@@ -46,7 +49,7 @@ void InitPipe(Pipe* pipes, int numPipes)
 
 void TickPipe(Pipe* pipes, int numPipes, const float DELTA_TIME)
 {
-	Move(pipes, numPipes, DELTA_TIME);
+    if (movementEnabled) Move(pipes, numPipes, DELTA_TIME);
 }
 
 void DrawPipe(Pipe* pipes, int numPipes)
@@ -106,4 +109,14 @@ void ResetPipeX(Pipe* p)
 	p->upperBody.x = GetScreenWidth();
 	p->lowerBody.x = GetScreenWidth();
 	p->scoreBody.x = GetScreenWidth() + (PIPE_W / 2);
+}
+
+void EnablePipeMovement()
+{
+    movementEnabled = true;
+}
+
+void DisablePipeMovement()
+{
+    movementEnabled = false;
 }
