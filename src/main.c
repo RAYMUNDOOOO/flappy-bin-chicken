@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "main.h"
+#include "menus.h"
 #include "game.h"
 #include <stdio.h>
 
@@ -55,6 +56,7 @@ int main(void)
 			case GAME_OVER:
 			{
                 DrawGame();
+                DrawGameOverMenu();
 			} break;
 
             case QUITTING:
@@ -74,6 +76,7 @@ int main(void)
 void SetupWindow()
 {
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Flappy Bin Chicken");
+    InitGui();
 	SetExitKey(0);
 	SetTargetFPS(144);
 }
