@@ -34,7 +34,7 @@ endif()
 
 # Adding our source files.
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_LIST_DIR}/src/*.c")
-set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/src/include")
+set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/src/include" "${CMAKE_CURRENT_LIST_DIR}/src/include/third-party")
 
 # Declaring our executable.
 add_executable(${PROJECT_NAME})
