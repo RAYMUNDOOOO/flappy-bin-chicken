@@ -81,3 +81,13 @@ int GetScore()
 {
 	return score; 
 }
+
+void RestartGame()
+{
+    score = 0;
+	InitBird(bird);
+    InitPipe(pipes, numPipes);
+    EnableInput();
+    EnablePipeMovement();
+    SetGameRunning();
+}

@@ -5,3 +5,4 @@ void DrawGame();
 void CleanGame();
 
 int GetScore();
+void RestartGame();

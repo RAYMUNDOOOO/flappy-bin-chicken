@@ -18,7 +18,6 @@ typedef enum
 } ApplicationState;
 ApplicationState applicationState = MAIN_MENU;
 
-
 // Declarations.
 void SetupWindow();
 void DrawScore();
@@ -58,7 +57,7 @@ int main(void)
                 DrawGame();
                 DrawPanel();
                 DrawLabel("GAME OVER");
-                DrawPlayAgainButton();
+                if (DrawPlayAgainButton()) RestartGame();
                 if (DrawQuitButton()) applicationState = QUITTING;
 			} break;
 
@@ -89,6 +88,11 @@ void DrawScore()
 	char scoreStr[8];
 	sprintf(scoreStr, "%d", GetScore());
 	DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 32, BLACK);
+}
+
+void SetGameRunning()
+{
+    applicationState = RUNNING;
 }
 
 void GameOver()
