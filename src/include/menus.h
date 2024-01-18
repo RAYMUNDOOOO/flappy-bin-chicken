@@ -8,6 +8,9 @@ static const int H_PADDING = 10;
 static const int V_PADDING = 10;
 
 void InitGui();
-void DrawGameOverMenu();
-void DrawPauseMenu();
-void DrawStartScreenMenu();
+
+void DrawPanel();
+void DrawLabel(char* Text);
+int DrawPlayAgainButton();
+int DrawQuitButton();
+

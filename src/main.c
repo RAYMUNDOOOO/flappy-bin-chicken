@@ -56,7 +56,10 @@ int main(void)
 			case GAME_OVER:
 			{
                 DrawGame();
-                DrawGameOverMenu();
+                DrawPanel();
+                DrawLabel("GAME OVER");
+                DrawPlayAgainButton();
+                if (DrawQuitButton()) applicationState = QUITTING;
 			} break;
 
             case QUITTING:

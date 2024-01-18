@@ -18,18 +18,22 @@ void InitGui()
     buttonQuit = (Rectangle){ GetScreenWidth() / 2 - 100 + H_PADDING, GetScreenHeight() * 0.4 + V_PADDING + LABEL_HEIGHT + V_PADDING + 30, BUTTON_WIDTH, BUTTON_HEIGHT };
 }
 
-void DrawStartScreenMenu()
-{
-}
-
-void DrawGameOverMenu()
+void DrawPanel()
 {
     GuiPanel(panel, "");
-    GuiLabel(label, "GAME OVER");
-    GuiLabelButton(buttonPlayAgain, "PLAY AGAIN");
-    GuiLabelButton(buttonQuit, "QUIT");
 }
 
-void DrawPauseMenu()
+void DrawLabel(char* Text)
 {
+    GuiLabel(label, Text);
+}
+
+int DrawPlayAgainButton()
+{
+    return GuiLabelButton(buttonPlayAgain, "PLAY AGAIN");
+}
+
+int DrawQuitButton()
+{
+    return GuiLabelButton(buttonQuit, "QUIT");
 }
