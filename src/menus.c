@@ -28,6 +28,11 @@ void DrawLabel(char* Text)
     GuiLabel(label, Text);
 }
 
+int DrawStartButton()
+{
+    return GuiLabelButton(buttonPlayAgain, "START");
+}
+
 int DrawPlayAgainButton()
 {
     return GuiLabelButton(buttonPlayAgain, "PLAY AGAIN");

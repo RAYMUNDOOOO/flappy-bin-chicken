@@ -36,8 +36,15 @@ int main(void)
 		{
 			case MAIN_MENU:
 			{
-				InitGame();
-				applicationState = RUNNING;
+				// InitGame();
+                DrawPanel();
+                DrawLabel("FLAPPY BIN CHICKEN");
+                if (DrawStartButton())
+                {
+                    InitGame();
+                    SetGameRunning();
+                }
+                if (DrawQuitButton()) SetGameQuitting();
 			} break;
 
 			case RUNNING:
@@ -45,6 +52,7 @@ int main(void)
                 if (IsKeyPressed(KEY_ESCAPE)) SetGamePaused();
 				TickGame(GetFrameTime());
 				DrawGame();
+		        DrawScore();
 			} break;
 
 			case PAUSED:
@@ -56,6 +64,7 @@ int main(void)
                 DrawLabel("PAUSED");
                 if (DrawResumeButton()) SetGameRunning();
                 if (DrawQuitButton()) SetGameQuitting();
+		        DrawScore();
 			} break;
 
 			case GAME_OVER:
@@ -65,6 +74,7 @@ int main(void)
                 DrawLabel("GAME OVER");
                 if (DrawPlayAgainButton()) RestartGame();
                 if (DrawQuitButton()) applicationState = QUITTING;
+		        DrawScore();
 			} break;
 
             case QUITTING:
@@ -72,7 +82,6 @@ int main(void)
             } break;
 		}
 
-		DrawScore();
 		EndDrawing();
 	}
 

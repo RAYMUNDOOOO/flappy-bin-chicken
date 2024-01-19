@@ -11,6 +11,7 @@ void InitGui();
 
 void DrawPanel();
 void DrawLabel(char* Text);
+int DrawStartButton();
 int DrawPlayAgainButton();
 int DrawQuitButton();
 int DrawResumeButton();
