@@ -37,3 +37,8 @@ int DrawQuitButton()
 {
     return GuiLabelButton(buttonQuit, "QUIT");
 }
+
+int DrawResumeButton()
+{
+    return GuiLabelButton(buttonPlayAgain, "RESUME");
+}

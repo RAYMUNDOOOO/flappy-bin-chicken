@@ -52,6 +52,10 @@ int main(void)
                 if (IsKeyPressed(KEY_ESCAPE)) SetGameRunning();
 
                 DrawGame();
+                DrawPanel();
+                DrawLabel("PAUSED");
+                if (DrawResumeButton()) SetGameRunning();
+                if (DrawQuitButton()) SetGameQuitting();
 			} break;
 
 			case GAME_OVER:
@@ -104,6 +108,10 @@ void SetGameRunning()
 
 void GameOver()
 {
-    // TODO: Present game over menu.
     applicationState = GAME_OVER; 
+}
+
+void SetGameQuitting()
+{
+    applicationState = QUITTING;
 }

@@ -13,4 +13,5 @@ void DrawPanel();
 void DrawLabel(char* Text);
 int DrawPlayAgainButton();
 int DrawQuitButton();
+int DrawResumeButton();
 
