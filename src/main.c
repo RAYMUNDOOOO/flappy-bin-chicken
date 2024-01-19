@@ -32,8 +32,6 @@ int main(void)
 		ClearBackground(RAYWHITE);
 		DrawFPS(10, 10);
 
-		if (IsKeyPressed(KEY_ESCAPE)) applicationState = QUITTING;
-
 		switch (applicationState)
 		{
 			case MAIN_MENU:
@@ -44,12 +42,16 @@ int main(void)
 
 			case RUNNING:
 			{
+                if (IsKeyPressed(KEY_ESCAPE)) SetGamePaused();
 				TickGame(GetFrameTime());
 				DrawGame();
 			} break;
 
 			case PAUSED:
 			{
+                if (IsKeyPressed(KEY_ESCAPE)) SetGameRunning();
+
+                DrawGame();
 			} break;
 
 			case GAME_OVER:
@@ -88,6 +90,11 @@ void DrawScore()
 	char scoreStr[8];
 	sprintf(scoreStr, "%d", GetScore());
 	DrawText(scoreStr, GetScreenWidth() / 2, GetScreenHeight() * 0.1, 32, BLACK);
+}
+
+void SetGamePaused()
+{
+    applicationState = PAUSED;
 }
 
 void SetGameRunning()

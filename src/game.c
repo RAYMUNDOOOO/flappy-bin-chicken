@@ -66,6 +66,7 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
 		}
 	}
 
+    // Present GAME OVER menu when bird falls to bottom of screen.
     if (bird->body.y <= 0 || bird->body.y >= GetScreenHeight())
     {
         GameOver();
