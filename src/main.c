@@ -79,13 +79,13 @@ int main(void)
 
             case QUITTING:
             {
+	            CleanGame();
             } break;
 		}
 
 		EndDrawing();
 	}
 
-	CleanGame();
 	CloseWindow();
 	return 0;
 }
