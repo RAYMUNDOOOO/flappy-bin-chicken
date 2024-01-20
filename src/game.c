@@ -10,6 +10,11 @@ int score = 0;
 int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
+Wave scoreSfx;
+Wave collisionSfx;
+Wave gameOverSfx;
+Wave flapSfx;
+Wave buttonSfx;
 
 void QueryCollisions(const Bird* bird, Pipe* pipes);
 void AddScore(const int value);
@@ -22,6 +27,16 @@ void InitGame()
 	numPipes = GetNumPipes(GetScreenWidth());
 	pipes = (Pipe*)malloc(numPipes * sizeof(Pipe));
 	InitPipe(pipes, numPipes);
+
+    // Audio configuration
+    if (IsAudioDeviceReady())
+    {
+        scoreSfx = LoadWave("../res/audio/score.wav");
+        collisionSfx = LoadWave("../res/audio/collision.wav");
+        gameOverSfx = LoadWave("../res/audio/gameOver.wav");
+        flapSfx = LoadWave("../res/audio/flap.wav");
+        buttonSfx = LoadWave("../res/audio/button.wav");
+    }
 }
 
 void TickGame(const float DELTA_TIME)

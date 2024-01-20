@@ -20,6 +20,7 @@ ApplicationState applicationState = MAIN_MENU;
 
 // Declarations.
 void SetupWindow();
+void SetupAudio();
 void DrawScore();
 
 int main(void)
@@ -96,6 +97,12 @@ void SetupWindow()
     InitGui();
 	SetExitKey(0);
 	SetTargetFPS(144);
+}
+
+void SetupAudio()
+{
+    InitAudioDevice();
+    SetMasterVolume(90);
 }
 
 void DrawScore()
