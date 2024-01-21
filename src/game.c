@@ -10,11 +10,9 @@ int score = 0;
 int numPipes = 0;
 static Bird* bird = NULL;
 static Pipe* pipes = NULL;
-Wave scoreSfx;
-Wave collisionSfx;
-Wave gameOverSfx;
-Wave flapSfx;
-Wave buttonSfx;
+Sound scoreSfx;
+Sound collisionSfx;
+Sound gameOverSfx;
 
 void QueryCollisions(const Bird* bird, Pipe* pipes);
 void AddScore(const int value);
@@ -31,11 +29,10 @@ void InitGame()
     // Audio configuration
     if (IsAudioDeviceReady())
     {
-        scoreSfx = LoadWave("../res/audio/score.wav");
-        collisionSfx = LoadWave("../res/audio/collision.wav");
-        gameOverSfx = LoadWave("../res/audio/gameOver.wav");
-        flapSfx = LoadWave("../res/audio/flap.wav");
-        buttonSfx = LoadWave("../res/audio/button.wav");
+        scoreSfx = LoadSound("../res/audio/score.wav");
+        collisionSfx = LoadSound("../res/audio/collision.wav");
+        gameOverSfx = LoadSound("../res/audio/gameOver.wav");
+        printf("Loaded game sounds!\n");
     }
 }
 
@@ -69,12 +66,14 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
             if (CheckCollisionRecs(bird->body, pipes[i].upperBody) || 
                 CheckCollisionRecs(bird->body, pipes[i].lowerBody))
             {
+                PlaySound(collisionSfx);
                 DisableInput();
                 DisablePipeMovement();
             }
 
 			if (CheckCollisionRecs(bird->body, pipes[i].scoreBody)) 
 			{	
+                PlaySound(scoreSfx);
 				AddScore(1);
 				pipes[i].scoreBody.y = 0;
 			}
@@ -84,6 +83,7 @@ void QueryCollisions(const Bird* bird, Pipe* pipes)
     // Present GAME OVER menu when bird falls to bottom of screen.
     if (bird->body.y <= 0 || bird->body.y >= GetScreenHeight())
     {
+        PlaySound(gameOverSfx);
         GameOver();
     }
 }

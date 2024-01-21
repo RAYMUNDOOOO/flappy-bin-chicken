@@ -5,6 +5,7 @@
 const int MAX_ROT = -20;
 const int MIN_ROT = 65;
 bool inputEnabled = true;
+Sound flapSfx;
 
 // DECLARATIONS
 void PrepareJump(Bird* bird);
@@ -27,13 +28,19 @@ void InitBird(Bird* bird)
 		bird->rotation = 0;
 		bird->rotationRate = 100;
 	}
+
+    if (IsAudioDeviceReady()) flapSfx = LoadSound("../res/audio/flap.wav");
 }
 
 void TickBird(Bird* bird, const float DELTA_TIME)
 {
     if (inputEnabled)
     {
-        if (IsKeyPressed(KEY_SPACE)) PrepareJump(bird);
+        if (IsKeyPressed(KEY_SPACE)) 
+        {
+            PrepareJump(bird);
+            PlaySound(flapSfx);
+        }
     }
 
 	ApplyVelocities(bird, DELTA_TIME);

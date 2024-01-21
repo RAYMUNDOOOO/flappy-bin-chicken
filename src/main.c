@@ -18,6 +18,8 @@ typedef enum
 } ApplicationState;
 ApplicationState applicationState = MAIN_MENU;
 
+Sound buttonSfx;
+
 // Declarations.
 void SetupWindow();
 void SetupAudio();
@@ -26,6 +28,8 @@ void DrawScore();
 int main(void)
 {
 	SetupWindow();
+    SetupAudio();
+    if (IsAudioDeviceReady()) buttonSfx = LoadSound("../res/audio/button.wav");
 
 	while (!WindowShouldClose() && applicationState != QUITTING)
 	{
@@ -40,12 +44,19 @@ int main(void)
 				// InitGame();
                 DrawPanel();
                 DrawLabel("FLAPPY BIN CHICKEN");
+
                 if (DrawStartButton())
                 {
+                    PlaySound(buttonSfx);
                     InitGame();
                     SetGameRunning();
                 }
-                if (DrawQuitButton()) SetGameQuitting();
+
+                if (DrawQuitButton()) 
+                {
+                    SetGameQuitting();
+                    PlaySound(buttonSfx);
+                }
 			} break;
 
 			case RUNNING:
@@ -63,8 +74,19 @@ int main(void)
                 DrawGame();
                 DrawPanel();
                 DrawLabel("PAUSED");
-                if (DrawResumeButton()) SetGameRunning();
-                if (DrawQuitButton()) SetGameQuitting();
+
+                if (DrawResumeButton()) 
+                {
+                    SetGameRunning();
+                    PlaySound(buttonSfx);
+                }
+
+                if (DrawQuitButton())
+                {
+                    SetGameQuitting();
+                    PlaySound(buttonSfx);
+                }
+
 		        DrawScore();
 			} break;
 
@@ -73,8 +95,19 @@ int main(void)
                 DrawGame();
                 DrawPanel();
                 DrawLabel("GAME OVER");
-                if (DrawPlayAgainButton()) RestartGame();
-                if (DrawQuitButton()) applicationState = QUITTING;
+
+                if (DrawPlayAgainButton())
+                {
+                    RestartGame();
+                    PlaySound(buttonSfx);
+                }
+
+                if (DrawQuitButton())
+                {
+                    applicationState = QUITTING;
+                    PlaySound(buttonSfx);
+                }
+
 		        DrawScore();
 			} break;
 
@@ -102,7 +135,6 @@ void SetupWindow()
 void SetupAudio()
 {
     InitAudioDevice();
-    SetMasterVolume(90);
 }
 
 void DrawScore()
