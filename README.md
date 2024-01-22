@@ -2,6 +2,11 @@
 
 A Flappy Bird clone without any pretty graphics and some gnarly sound effects made by yours truly.
 
+![image](https://github.com/RAYMUNDOOOO/flappy-bin-chicken/assets/120559465/58945626-68f1-4f4d-a5d7-618176e7b8f6)
+![image](https://github.com/RAYMUNDOOOO/flappy-bin-chicken/assets/120559465/6ae95356-3555-4066-b46d-c583ca946e0d)
+![image](https://github.com/RAYMUNDOOOO/flappy-bin-chicken/assets/120559465/30f3ca5f-86a6-43da-badc-3cf5565651e8)
+
+
 Powered by [raylib](<https://www.raylib.com/>)
 
 ## Goals
