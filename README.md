@@ -16,12 +16,17 @@ Despite the *very* small scope of the game, it showed me how to:
 - Program procedurally as I had ony done object-oriented programming til now
 
 ## Building
+### Requirements
+- CMake version greater than 3.20.
 
-1. Ensure that you have CMake installed and that it is at least version 3.20.
+### Command Line Instructions
+1. Clone this project into the directory of your choosing.
 2. From the root directory of this project, create a new directory called `build` and change directories into it.
 3. From the command line, call `cmake ..`. If **raylib** has not been installed already, it will clone it and include its `CMakeLists.txt` into the build process of this project.
 
 ```sh
+git clone git@github.com:RAYMUNDOOOO/flappy-bin-chicken.git
+cd flappy-bin-chicken
 mkdir build
 cd build
 cmake ..
